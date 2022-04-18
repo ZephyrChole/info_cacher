@@ -1,5 +1,6 @@
 import pickle
 import os
+import glob
 from datetime import date
 
 
@@ -26,5 +27,10 @@ class InfoCacher:
             return pickle.loads(file.read())
 
     def dumps(self, something):
+        self.clear_old()
         with open(self.history_file_path, 'wb') as file:
             file.write(pickle.dumps(something))
+
+    def clear_old(self):
+        for f in glob.glob(os.path.join(self.dir_, "{}_history_*.pickle")):
+            os.remove(f)
