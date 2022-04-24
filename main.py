@@ -32,5 +32,5 @@ class InfoCacher:
             file.write(pickle.dumps(something))
 
     def clear_old(self):
-        for f in glob.glob(os.path.join(self.dir_, "{}_history_*.pickle")):
+        for f in glob.glob(os.path.join(self.dir_, f'{self.name}_history_*.pickle')):
             os.remove(f)
